@@ -1,30 +1,30 @@
-pipleline {
-  agent any
-  tools {
-    maven 'maven'
-  }
-  stages {
-    stage ("clean up"){
-      setps{
-        deleteDir()
-      }
-    }
-    stage ("clone repo"){
-      setps{
-        sh "https://github.com/hamouuuuuuda/tp2jenkins.git"
-      }
-    }
-    stage ("Generate backend image"){
-      setps{
-        dir ("exp1-spring"){
-          sh "mvn clean install"
-          sh "docker build -t docexp1-spring"
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building...'
+                // Example: sh 'mvn clean package'
+            }
         }
-      }
-    }
-    stage ("Run docker compose"){
-      setps{
-       dir ("exp1-spring"){
-          sh " docker compose up -d"
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                // Example: sh 'mvn test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+                // Example: sh 'kubectl apply -f deployment.yaml'
+            }
         }
     }
+
+    post {
+        always {
+            echo 'Pipeline completed.'
+        }
+    }
+}
