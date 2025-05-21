@@ -15,11 +15,10 @@ pipeline {
             }
         }
         stage('Deploy') {
-            steps {
-                echo 'Deploying...'
-                // Example: sh 'kubectl apply -f deployment.yaml'
-            }
-        }
+    steps {
+        echo 'Deploying...'
+    }
+} // Added missing brace
     }
 
     post {
